@@ -46,7 +46,7 @@ jobs:
             cd ~/HN_KS23B_LeKhanhDuong_009
 
             # Kéo (pull) image mới nhất về máy chủ
-            docker-compose pull
+            docker compose pull
 
             # Khởi động lại các container ở chế độ background
-            docker-compose up -d
+            docker compose up -d
