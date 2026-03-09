@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --color-priority-urgent: #ef4444;
+  --color-priority-important: #f59e0b;
+  --color-priority-normal: #3b82f6;
+}
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 font-sans;
+  }
+}
+
+.glass {
+  @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-xl;
+}
+
+.btn-primary {
+  @apply bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition-all transform active:scale-95 flex items-center gap-2;
+}
+
+.badge {
+  @apply px-2 py-1 rounded-full text-xs font-bold uppercase tracking-wider;
+}

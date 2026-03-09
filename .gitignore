@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+.gradle/
+
+# Build outputs
+build/
+dist/
+out/
+target/
+
+# Log files
+*.log
+logs/
+
+# Environment variables & sensitive info
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+id_rsa
+id_rsa.pub
+secrets.yml
+
+# IDE and OS files
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db

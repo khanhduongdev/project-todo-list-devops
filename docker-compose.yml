@@ -1,0 +1,50 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: db
+    # Cấm mở port 5432 ra ngoài Internet nên không cấu hình 'ports'
+    environment:
+      POSTGRES_DB: rikkei_prod
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - rikkei_network
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./todo-list
+      dockerfile: Dockerfile
+    container_name: backend
+    depends_on:
+      - db
+    environment:
+      - DB_URL=jdbc:postgresql://db:5432/rikkei_prod
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres_password
+    networks:
+      - rikkei_network
+    restart: unless-stopped
+    # Backend port chỉ cần nội bộ truy cập từ Nginx (bằng container name "backend"), không cần mở ra máy host trừ khi muốn test trực tiếp API
+
+  frontend:
+    build:
+      context: ./todo-list-fe
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - rikkei_network
+    restart: unless-stopped
+
+networks:
+  rikkei_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
